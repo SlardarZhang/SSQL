@@ -8,7 +8,7 @@ Use MySQLi to connect MySQL database by a easy way.
 ````
 Load configuration from file.
 ````
-2. new SSQL(DATA_SERVER_ADDRESS, USERNAME, PASSWORD, SCHEMA);
+2. new SSQL(DATABASE_SERVER_ADDRESS, USERNAME, PASSWORD, SCHEMA);
 ```` 
 Configure by variable.
 ````
@@ -22,6 +22,14 @@ SSQL->set_charset("CHARSET"); Set charset for reading and writing data.
 ```
 SSQL->query("SQL"); Execute SQL statement.
 ```
+## Configure file
+````
+Configure file should have 4 lines
+````
+1. Database server address(IP address or domain)
+2. Username
+3. Password
+4. Schema
 #### Example
 * SSQL->query("INSERT INTO table_name(a,b,c,d) VALUES(?,?,?,?);" , "idsb", 32, 1.23, "String", NULL );
 - SSQL->query("SELECT * FROM table_name");
@@ -63,7 +71,7 @@ Get the error of any step.
 TRUE will return the detail of the error.
 ````
 ## Reconnect
-* SSQL->reconnect(DATA_SERVER_ADDRESS, USERNAME, PASSWORD, SCHEMA);
+* SSQL->reconnect(DATABASE_SERVER_ADDRESS, USERNAME, PASSWORD, SCHEMA);
 ````
 Reconnect by new arguments. It can change SSQL connect to another server or schema.
 ````
