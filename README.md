@@ -22,7 +22,7 @@ SSQL->set_charset("CHARSET"); Set charset for reading and writing data.
 ```
 SSQL->query("SQL"); Execute SQL statement.
 ```
-## Configure file
+# Configure file
 ````
 Configure file should have 4 lines
 ````
@@ -30,13 +30,13 @@ Configure file should have 4 lines
 2. Username
 3. Password
 4. Schema
-#### Example
+# Using Example
 * SSQL->query("INSERT INTO table_name(a,b,c,d) VALUES(?,?,?,?);" , "idsb", 32, 1.23, "String", NULL );
 - SSQL->query("SELECT * FROM table_name");
 * SSQL->query("UPDATE table_name SET a=? WHERE b=?" , "id", 32, 64.64);
 - SSQL->query("DELETE * FROM table_name WHERE c=?" , "s" , "String");
 
-### Description
+## Description
 ```
 For the secound arguments bind character(EX1)
 Character	Description
@@ -75,7 +75,7 @@ TRUE will return the detail of the error.
 ````
 Reconnect by new arguments. It can change SSQL connect to another server or schema.
 ````
-# Error Codes
+## Error Codes
 ```
 0x0000 Construct error, number of arguments error.
 0x0001 Database connect error.
