@@ -1,0 +1,34 @@
+{
+	"type":"mysql/mssql/oracle/mongobd/postgresql",
+	"host":"DATABASE_HOST",
+	"username":"root",
+	"password":"password",
+	"schema":"test",
+
+	"report_error":"true/false",
+	"port":"3306",
+	"timeout":10,
+	"charset":"utf-8",
+	"SSL":"true/false",
+	"verify_certificate":"true/false",
+	"use_cursor":"true/false",
+
+	"mysql_auth":"native/sha256/caching_sha2",
+	"mysql_ca_file":"MUST BE FULL PATH",
+	
+	"mssql_auth":"u/windows",
+	
+	"mongodb_auth":"u/u256/ldap/x509",
+	"mongodb_auth_db":"admin",
+	"mongodb_sql_mode":"true/false",
+	"mongodb_ssl_ca_dir":"MUST BE FULL PATH",
+	"mongodb_ssl_ca_file":"MUST BE FULL PATH",
+	"mongodb_ssl_ca_crl_file":"MUST BE FULL PATH",
+	"mongodb_ssl_allow_self_signed":"true/false",
+	"mongodb_ssl_pem_file":"MUST BE FULL PATH",
+	"mongodb_ssl_pem_pwd":"pem_password",
+
+	"postgresql_ssl":"disable/allow/prefer/require/verify-ca/verify-full",
+	"postgresql_ca_file":"MUST BE FULL PATH",
+	"postgresql_language":"zh_CN.UTF-8"
+}
