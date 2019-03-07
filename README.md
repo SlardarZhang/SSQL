@@ -70,7 +70,7 @@ PHP connect to MySQL / Microsoft SQL Server / MongoDB / Oracle / PostgreSQL by a
       * [free_cursor](#free_cursor)
       * [ping](#ping)
 
-   * [MongoDB SQL Supporting](#MongoDB_SQL)
+   * [MongoDB SQL Mode Supporting](#MongoDB_SQL)
    * [Error data structure](#error_structure)
 <!--te-->
 
@@ -370,7 +370,7 @@ Default value is `FALSE`.
 ````
 If you want to execute SQL statement, you can set this be [TRUE]
 ````
-More details, please check [MongoDB SQL Supporting](#MongoDB_SQL)
+More details, please check [MongoDB SQL Mode Supporting](#MongoDB_SQL)
 </details>
 
 <span id="c_mongodb_ssl_ca_dir"></span>
@@ -1288,7 +1288,7 @@ Database connection is good or not.
 
 ---
 <span id="MongoDB_SQL"></span>
-# MongoDB SQL Supporting
+# MongoDB SQL Mode Supporting
 Example:
 ```sql
 INSERT INTO table_a(a) VALUES(SELECT a FROM table_b WHERE b=(SELECT b FROM table_C WHERE c=1));
