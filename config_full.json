@@ -2,7 +2,7 @@
 	"type":"mysql/mssql/oracle/mongobd/postgresql",
 	"host":"DATABASE_HOST",
 	"username":"root",
-	"password":"345795321",
+	"password":"password",
 	"schema":"test",
 
 	"report_error":"true/false",

@@ -2,7 +2,7 @@
 	"type":"postgresql",
 	"host":"vm-server.slardar.net",
 	"username":"root",
-	"password":"345795321",
+	"password":"password",
 	"schema":"test",
 	"use_cursor":false,
 
