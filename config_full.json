@@ -18,7 +18,7 @@
 	
 	"mssql_auth":"u/windows",
 	
-	"mongodb_auth":"u/u256/ldap/x509",
+	"mongodb_auth":"none/u/u256/ldap/x509",
 	"mongodb_auth_db":"admin",
 	"mongodb_sql_mode":"true/false",
 	"mongodb_ssl_ca_dir":"MUST BE FULL PATH",

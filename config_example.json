@@ -1,8 +1,8 @@
 {
-	"type":"mysql",
+	"type":"postgresql",
 	"host":"vm-server.slardar.net",
 	"username":"root",
-	"password":"password",
+	"password":"345795321",
 	"schema":"test",
 	"use_cursor":false,
 
