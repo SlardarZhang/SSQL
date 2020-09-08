@@ -1,5 +1,21 @@
 <?PHP
-//SSQL 2.0
+/**
+ *  Slardar SQL
+ *  
+ *  @author Slardar
+ *  @version 2.0
+ *  @copyright Slardar
+ */
+
+
+//David Header
+if(!defined("IN_DAVID"))
+{
+	header("HTTP/1.0 401 Unauthorized");
+	echo file_get_contents(__DIR__ . "/../../static/401.html");
+	die();
+}
+
 class SSQL
 {
 	private $sql_handle;
@@ -159,8 +175,8 @@ class SSQL
 	function __destruct()
 	//1x
 	{
+		$this->block_error_reporting();
 		try{
-			$this->regist_error_handler();
 			$this->free_cursor();
 			if ($this->sql_handle != NULL) {
 				switch ($this->sql_type) {
@@ -205,15 +221,15 @@ class SSQL
 		}catch(Exception $ex){
 			$this->add_error(true, "1x0000", trim($ex->getMessage()));
 		}finally{
-			restore_error_handler();
+			$this->restore_error_reporting();
 		}
 	}
 
 	public function query()
 	//2x
 	{
+		$this->block_error_reporting();
 		try{
-			$this->regist_error_handler();
 			$this->num_rows = 0;
 			$this->column_num = 0;
 			$this->affected_rows = 0;
@@ -733,7 +749,7 @@ class SSQL
 			}
 			return false;
 		}
-		restore_error_handler();
+		$this->restore_error_reporting();
 	}
 
 	public function get_result()
@@ -747,7 +763,7 @@ class SSQL
 			$this->add_error(true, "3x0002", "No active cursor.");
 			return false;
 		}
-		$this->regist_error_handler();
+		$this->block_error_reporting();
 		try{
 			if (func_num_args() > 1) {
 				$this->add_error(true, "3x0003", "Invalid using.");
@@ -815,7 +831,7 @@ class SSQL
 			$this->add_error(false, "3x0000", trim($ex->getMessage()));
 			return false;
 		}finally {
-			restore_error_handler();
+			$this->restore_error_reporting();
 		}
 	}
 
@@ -1176,6 +1192,7 @@ class SSQL
 	public function ping()
 	//11x
 	{
+		$this->block_error_reporting();
 		try{
 			if ($this->sql_handle == NULL) {
 				$this->add_error(false, "11x0001", "No SQL initialized.");
@@ -1233,7 +1250,7 @@ class SSQL
 			}
 			return false;
 		}finally {
-			restore_error_handler();
+			$this->restore_error_reporting();
 		}
 	}
 
@@ -1513,8 +1530,8 @@ class SSQL
 	private function connect_mysql($host, $port, $username, $password, $schema, $timeout, $charset, $ssl, $verify_certificate, $mysql_ca_file)
 	//13x
 	{
+		$this->block_error_reporting();
 		try{
-			$this->regist_error_handler();
 			if ($this->sql_type === 0) {
 				$this->sql_handle = mysqli_init();
 				$this->sql_handle->options(MYSQLI_OPT_CONNECT_TIMEOUT, $timeout);
@@ -1552,15 +1569,15 @@ class SSQL
 		}catch(Exception $ex){
 			$this->add_error(false, "13x0000", trim($ex->getMessage()));
 		}finally {
-			restore_error_handler();
+			$this->restore_error_reporting();
 		}
 	}
 
 	private function connect_mssql($host, $port, $username, $password, $schema, $mssql_auth ,$timeout, $charset, $ssl, $verify_certificate)
 	//14x
 	{
+		$this->block_error_reporting();
 		try{
-			$this->regist_error_handler();
 			switch ($mssql_auth) {
 				case "u":
 					$connectionInfo = array( "Database"=>$schema, "UID"=>$username, "PWD"=>$password, "CharacterSet"=>$charset, "LoginTimeout"=>$timeout);
@@ -1586,28 +1603,28 @@ class SSQL
 		}catch(Exception $ex){
 			$this->add_error(false, "14x0000", trim($ex->getMessage()));
 		}finally {
-			restore_error_handler();
+			$this->restore_error_reporting();
 		}
 	}
 
 	private function connect_oracle($host, $port, $username, $password, $schema, $timeout, $charset)
 	//15x
 	{
+		$this->block_error_reporting();
 		try{
-			$this->regist_error_handler();
 			$this->sql_handle = oci_new_connect($username, $password, $host.":". $port ."/".$schema, $charset);
 		}catch(Exception $ex){
 			$this->add_error(false, "15x0000", trim($ex->getMessage()));
 		} finally {
-			restore_error_handler();
+			$this->restore_error_reporting();
 		}
 	}
 
 	private function connect_mongodb($host, $port, $username, $password, $mongodb_auth_db, $schema, $mongodb_auth, $timeout, $charset, $ssl, $verify_certificate, $ca_dir, $ca_file, $ca_crl_file, $pem_file, $mongodb_ssl_pem_password, $allow_self_signed)
 	//16x
 	{
+		$this->block_error_reporting();
 		try{
-			$this->regist_error_handler();
 			$options = array("connect" => true, "socketTimeoutMS" => $timeout*1000, "connectTimeoutMS" => $timeout*1000, "maxTimeMS" => $timeout*1000);
 			switch (strtolower($mongodb_auth)) {
 				case "u":
@@ -1658,15 +1675,16 @@ class SSQL
 		}catch(Exception $ex){
 			$this->add_error(false, "16x0000", trim($ex->getMessage()));
 		} finally {
-			restore_error_handler();
+			$this->restore_error_reporting();
 		}
 	}
 
 	private function connect_postgresql($host, $port, $username, $password, $schema, $timeout, $charset, $language, $ssl, $ca_file)
 	//17x
 	{
+
+		$this->block_error_reporting();
 		try{
-			$this->regist_error_handler();
 			$connect_string = "host=".$host." port=".$port." dbname=".$schema." user=".$username." password=".$password." connect_timeout=".$timeout. " sslmode=".$ssl;
 			switch ($ssl) {
 				case "disable":
@@ -1690,7 +1708,7 @@ class SSQL
 		}catch(Exception $ex){
 			$this->add_error(false, "17x0000", trim($ex->getMessage()));
 		} finally {
-			restore_error_handler();
+			$this->restore_error_reporting();
 		}
 	}
 	
@@ -1708,15 +1726,15 @@ class SSQL
 	public function sql_spliter($sql)
 	//18x
 	{
+		$this->block_error_reporting();
 		try {
-			$this->regist_error_handler();
 			$sql_array = $this->sql_spliter_p($sql, false);
 			return $sql_array;
 		} catch (Exception $e) {
 			$this->add_error(false, "18x0000", $e->getMessage());
 			return false;
 		} finally{
-			restore_error_handler();
+			$this->restore_error_reporting();
 		}
 	}
 
@@ -1845,8 +1863,8 @@ class SSQL
 	private function mongodb_sql_execute(&$sql_array)
 	//19x
 	{
+		$this->block_error_reporting();
 		try{
-			$this->regist_error_handler();
 			foreach ($sql_array as &$value) {
 				if (is_array($value)) {
 					if($this->mongodb_sql_execute($value)){
@@ -1887,7 +1905,7 @@ class SSQL
 			$this->add_error(true, "19x0000", trim($ex->getMessage()));
 			return false;
 		}finally{
-			restore_error_handler();
+			$this->restore_error_reporting();
 		}
 	}
 
