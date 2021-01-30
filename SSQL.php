@@ -7,15 +7,6 @@
  *  @copyright Slardar
  */
 
-
-//David Header
-if(!defined("IN_DAVID"))
-{
-	header("HTTP/1.0 401 Unauthorized");
-	echo file_get_contents(__DIR__ . "/../../static/401.html");
-	die();
-}
-
 class SSQL
 {
 	private $block_set_error = FALSE;
@@ -99,7 +90,7 @@ class SSQL
 					return;
 				}
 				$json_string = file_get_contents($configure);
-				$configureArray = json_decode($json_string , FALSE);
+				$configureArray = json_decode($json_string , TRUE);
 				switch (json_last_error()) {
 					case JSON_ERROR_NONE:
 						break;
