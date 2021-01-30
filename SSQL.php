@@ -67,7 +67,7 @@ class SSQL
 	function __construct($configure)
 	//0x
 	{
-		$this->block_error_reporting();
+		//$this->block_error_reporting();
 		$this->error= "";
 		$this->report_error = FALSE;
 		$this->sql_handle = NULL;
