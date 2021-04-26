@@ -518,6 +518,11 @@ class SSQL
 							}
 						}
 						$stmt = $this->sql_handle->prepare($this->sql_statement);
+						if ($stmt === FALSE)
+						{
+							$this->add_error(FALSE, "2x0022", "You have an error in your SQL syntax.");
+							return FALSE;
+						}
 						array_unshift($params, $placeholders);
 						call_user_func_array(array($stmt, "bind_param"), $this->refValues($params));
 						if($stmt->execute()){
