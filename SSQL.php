@@ -58,7 +58,6 @@ class SSQL
 	private $error_code;
 	private $error_string;
 	private $error_erporting_setting;
-	private $report_erros;
 
 	public $data_table;
 	public $num_rows;
@@ -130,7 +129,7 @@ class SSQL
 
 			if (isset($configureArray["report_error"])) {
 				if ($configureArray["report_error"] === FALSE) {
-					$this->report_erros = FALSE;
+					$this->report_error = FALSE;
 					error_reporting(-1);
 				}
 			}
