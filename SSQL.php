@@ -54,6 +54,12 @@ class SSQL
 							"full outer join",
 							"join");
 
+	private $error;
+	private $error_code;
+	private $error_string;
+	private $error_erporting_setting;
+	private $report_erros;
+
 	public $data_table;
 	public $num_rows;
 	public $column_num;
@@ -68,6 +74,7 @@ class SSQL
 	//0x
 	{
 		//$this->block_error_reporting();
+		$this->error_erporting_setting = error_reporting();
 		$this->error= "";
 		$this->report_error = FALSE;
 		$this->sql_handle = NULL;
@@ -1570,7 +1577,7 @@ class SSQL
 			}
 			
 		}catch(Exception $ex){
-			$this->add_error(FALSE, "13x0000", trim($ex->getMessage()));
+			$this->add_error(FALSE, "13x0000", trim($ex->getMessage() . " | " . $ex->getLine()));
 		}finally {
 			$this->restore_error_reporting();
 		}
