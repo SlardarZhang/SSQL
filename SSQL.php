@@ -281,6 +281,7 @@ class SSQL
 			}
 
 			//Add end mark for MySQL
+			$this->sql_statement = trim($this->sql_statement);
 			if (substr($this->sql_statement, -2) != "--" && $this->sql_type != 2 && $this->sql_type != 4) {
 				if(substr($this->sql_statement, -1) != ";"){
 					$this->sql_statement = $this->sql_statement. ";--";
